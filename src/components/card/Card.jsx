@@ -1,17 +1,28 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 
 import "./Card.css";
 
-const Card = () => {
+const Card = ({ data }) => {
     return (
-        <div className="card-container">
-            <img
-                src={`https://randomuser.me/api/portraits/med/men/47.jpg`}
-                alt="USer"
-            />
-            <h2>Dummy User</h2>
-            <p>johndoe@gmail.com</p>
-        </div>
+        <>
+            {data?.map(({ name, email, picture }) => (
+                <div
+                    className="card"
+                    style={{ width: "18rem" }}
+                    key={`${name.first} ${name.last}`}
+                >
+                    <img
+                        src={`${picture.large}`}
+                        alt={`${name.title} ${name.first} ${name.last}`}
+                        class="card-img-top"
+                    />
+                    <div class="card-body">
+                        <h5 class="card-title">{`${name.title} ${name.first} ${name.last}`}</h5>
+                        <p class="card-text">{email}</p>
+                    </div>
+                </div>
+            ))}
+        </>
     );
 };
 
